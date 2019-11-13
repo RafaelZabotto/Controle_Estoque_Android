@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Controle Estoque</string>
+    <string-array name="tipos_alimentos">
+        <item>Arroz</item>
+        <item>Feijão</item>
+        <item>Açúcar</item>
+        <item>Achocolatado</item>
+        <item>Macarrão</item>
+        <item>Molho de Tomate</item>
+        <item>Óleo</item>
+        <item>Leite</item>
+        <item>Sal</item>
+        <item>Tempero</item>
+        <item>Farinha</item>
+        <item>Vinagre</item>
+        <item>Suco</item>
+        <item>Farinha de Trigo</item>
+        <item>Farinha de Milho</item>
+    </string-array>
+</resources>

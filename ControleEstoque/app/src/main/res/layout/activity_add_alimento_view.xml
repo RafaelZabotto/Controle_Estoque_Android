@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".View.AddAlimentoView">
+
+    <TextView
+        android:id="@+id/txtAlimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome do Alimento"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spnAlimento"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorButtonNormal"
+        android:spinnerMode="dialog" />
+
+    <TextView
+        android:id="@+id/txtValidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data de Validade"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/edtDataValidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Data de Validade"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btnInserirAlimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light"
+        android:text="Inserir Alimento" />
+
+    <ListView
+        android:id="@+id/lsvAlimentoInserido"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
