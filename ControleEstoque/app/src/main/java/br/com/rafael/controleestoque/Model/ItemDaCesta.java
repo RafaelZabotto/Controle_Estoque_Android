@@ -6,11 +6,19 @@ public class ItemDaCesta {
 
     private int codigo;
     private String nome;
-    private int quantidadeSelecionada;
+    private long codigoAlimento;
     private String Validade;
 
     public ItemDaCesta(){
 
+    }
+
+    public long getCodigoAlimento() {
+        return codigoAlimento;
+    }
+
+    public void setCodigoAlimento(long codigoAlimento) {
+        this.codigoAlimento = codigoAlimento;
     }
 
     public int getCodigo() {
@@ -29,14 +37,6 @@ public class ItemDaCesta {
         this.nome = nome;
     }
 
-    public int getQuantidadeSelecionada() {
-        return quantidadeSelecionada;
-    }
-
-    public void setQuantidadeSelecionada(int quantidadeSelecionada) {
-        this.quantidadeSelecionada = quantidadeSelecionada;
-    }
-
     public String getValidade() {
         return Validade;
     }
@@ -50,8 +50,8 @@ public class ItemDaCesta {
         return "ItemDaCesta{" +
                 "codigo=" + codigo +
                 ", nome='" + nome + '\'' +
-                ", quantidadeSelecionada=" + quantidadeSelecionada +
-                ", Validade=" + Validade +
+                ", codigoAlimento=" + codigoAlimento +
+                ", Validade='" + Validade + '\'' +
                 '}';
     }
 }

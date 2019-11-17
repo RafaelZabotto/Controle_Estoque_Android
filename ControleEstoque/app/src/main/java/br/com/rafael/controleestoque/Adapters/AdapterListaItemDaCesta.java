@@ -53,7 +53,7 @@ public class AdapterListaItemDaCesta extends BaseAdapter {
         TextView txtValidade = v.findViewById(R.id.txtValidadeItemCesta);
 
         txtNomeAlimento.setText(this.itemDaCestaList.get(posicao).getNome());
-        txtCodigo.setText(String.valueOf(this.itemDaCestaList.get(posicao).getCodigo()));
+        txtCodigo.setText(String.valueOf(this.itemDaCestaList.get(posicao).getCodigoAlimento()));
         txtValidade.setText(this.itemDaCestaList.get(posicao).getValidade());
 
         return v;
@@ -68,7 +68,8 @@ public class AdapterListaItemDaCesta extends BaseAdapter {
 
     /*
     * Atualiza a lista de produtos
-    * */
+    *
+    */
 
     public void atualizar(List<ItemDaCesta> itemDaCesta_2){
         this.itemDaCestaList.clear();

@@ -66,6 +66,11 @@ public class Alimento {
                 ", qtdEstoque=" + qtdEstoque +
                 '}';*/
 
+        /*while(this.nome.length() < 50){
+
+            this.nome = this.nome + " ";
+
+        }*/
         return this.codigo + "  -  " +this.nome + "  -  " + validade;
     }
 

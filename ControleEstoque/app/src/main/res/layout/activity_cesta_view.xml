@@ -31,6 +31,7 @@
         android:id="@+id/btnFinalizarCesta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="eventFecharCesta"
         android:text="Finalizar A Cesta" />
 
     <Space

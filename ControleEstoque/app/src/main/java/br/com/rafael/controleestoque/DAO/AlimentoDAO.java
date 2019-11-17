@@ -54,7 +54,10 @@ public class AlimentoDAO {
         SQLiteDatabase db = null;
         Cursor cursor;
 
-        String query = "SELECT nome, COUNT(id) FROM alimento GROUP BY nome ";
+        String query = "SELECT a.nome, COUNT(a.nome) " +
+                "FROM alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento " +
+                "WHERE b.id_alimento is NULL " +
+                "GROUP BY a.nome";
 
         try {
 
@@ -69,12 +72,8 @@ public class AlimentoDAO {
                 do {
 
                     alimento = new Alimento();
-                    //alimento.setCodigo(cursor.getInt(0));
                     alimento.setNome(cursor.getString(0));
                     alimento.setQtdEstoque(cursor.getInt(1));
-                    //alimento.setValidade(cursor.getString(2));
-                    //alimento.setData_inseriu(cursor.getString(3));
-                    //alimento.setQtdEstoque(cursor.getInt(4));
 
                     listarAlimentos.add(alimento);
 
@@ -100,12 +99,43 @@ public class AlimentoDAO {
         SQLiteDatabase db = null;
         Cursor cursor;
 
-        String query = "SELECT * FROM ((select * from alimento where nome like 'Arroz'LIMIT 5)) UNION\n" +
-                       "SELECT * FROM ((select * from alimento where nome like 'Leite' LIMIT 5)) UNION\n" +
-                       "SELECT * FROM ((select * from alimento where nome like 'Molho de Tomate' LIMIT 5)) UNION\n" +
-                       "SELECT * FROM ((select * from alimento where nome like 'Sal' LIMIT 5)) UNION\n" +
-                       "SELECT * FROM ((select * from alimento where nome like 'Óleo' LIMIT 5)) " +
-                       "ORDER BY nome, validade;";
+        String query ="SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Achocolatado' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Açúcar Cristal' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Açúcar Refinado' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Arroz' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Bala' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Bolacha Água e Sal' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Bolacha Maizena' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Bolo' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Bombril' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Detergente' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Ervilha' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Farinha Mandioca' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Farinha Milho' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Farinha Trigo' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Farofa' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Feijão' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Fubá' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Gelatina' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Goiabada' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Leite' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Leite em pó' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Macarrão' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Milho em lata' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Molho de tomate' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Óleo' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Papel Higiênico' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Pasta de Dentes' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Sabão em Barras' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Sabão em Pó' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Sal' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Salsicha' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Sardinha' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Seleta de Legumes' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Tempero' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Vinagre' LIMIT 5)) " +
+                      "ORDER BY nome, validade;";
+
 
         try{
 
@@ -120,11 +150,9 @@ public class AlimentoDAO {
                 do {
 
                     alimento = new Alimento();
-                    alimento.setCodigo(cursor.getInt(0));
-                    alimento.setNome(cursor.getString(1));
-                    alimento.setValidade(cursor.getString(2));
-                    //alimento.setQtdEstoque(cursor.getInt(3));
-
+                    alimento.setCodigo(cursor.getInt(1));
+                    alimento.setNome(cursor.getString(2));
+                    alimento.setValidade(cursor.getString(0));
 
                     listarAlimentosCesta.add(alimento);
 

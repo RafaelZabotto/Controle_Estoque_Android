@@ -1,20 +1,46 @@
 <resources>
     <string name="app_name">Controle Estoque</string>
     <string-array name="tipos_alimentos">
-        <item>Arroz</item>
-        <item>Feijão</item>
-        <item>Açúcar</item>
         <item>Achocolatado</item>
+        <item>Açúcar Cristal</item>
+        <item>Açúcar Refinado</item>
+        <item>Arroz</item>
+        <item>Bala</item>
+        <item>Bolacha Água e Sal</item>
+        <item>Bolacha Maizena</item>
+        <item>Bolo</item>
+        <item>Bombril</item>
+        <item>Café</item>
+        <item>Detergente</item>
+        <item>Ervilha</item>
+        <item>Farinha Mandioca</item>
+        <item>Farinha Milho</item>
+        <item>Farinha Trigo</item>
+        <item>Farofa</item>
+        <item>Feijão</item>
+        <item>Fubá</item>
+        <item>Gelatina</item>
+        <item>Goiabada</item>
+        <item>Leite em Caixa</item>
+        <item>Leite em Pó</item>
         <item>Macarrão</item>
-        <item>Molho de Tomate</item>
+        <item>Milho em lata</item>
+        <item>Molho de tomate</item>
         <item>Óleo</item>
-        <item>Leite</item>
+        <item>Papel Higiênico</item>
+        <item>Pasta de Dentes</item>
+        <item>Sabão em Barras</item>
+        <item>Sabão em Pó</item>
+        <item>Sabonete</item>
         <item>Sal</item>
+        <item>Salsicha</item>
+        <item>Sardinha</item>
+        <item>Seleta de Legumes</item>
         <item>Tempero</item>
-        <item>Farinha</item>
         <item>Vinagre</item>
-        <item>Suco</item>
-        <item>Farinha de Trigo</item>
-        <item>Farinha de Milho</item>
     </string-array>
 </resources>
+
+
+
+

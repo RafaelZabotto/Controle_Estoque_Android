@@ -5,28 +5,19 @@ import java.util.List;
 
 public class Cesta {
 
-    private int codigo;
-    private Alimento alimentoDoado;
+    private long codigo;
     private Date dataCesta;
     private List<ItemDaCesta> itensCesta;
 
     public Cesta() {
     }
 
-    public int getCodigo() {
+    public long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(long codigo) {
         this.codigo = codigo;
-    }
-
-    public Alimento getAlimentoDoado() {
-        return alimentoDoado;
-    }
-
-    public void setAlimentoDoado(Alimento alimentoDoado) {
-        this.alimentoDoado = alimentoDoado;
     }
 
     public Date getDataCesta() {
@@ -49,7 +40,6 @@ public class Cesta {
     public String toString() {
         return "Cesta{" +
                 "codigo=" + codigo +
-                ", alimentoDoado=" + alimentoDoado +
                 ", dataCesta=" + dataCesta +
                 ", itensCesta=" + itensCesta +
                 '}';

@@ -2,24 +2,21 @@ package br.com.rafael.controleestoque.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.Format;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +42,6 @@ public class AddAlimentoView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_alimento_view);
-
 
         /*Bloco de configuração do Spinner*/
         spnAlimento = findViewById(R.id.spnAlimento);
@@ -107,25 +103,35 @@ public class AddAlimentoView extends AppCompatActivity {
                     AlimentoController alimentoController =
                             new AlimentoController(ConexaoSQLite.getInstaciaConexao(AddAlimentoView.this));
 
-                    long codigoAlimento = alimentoController.salvarAlimento(alimentoInserido);
+                    /*Inserir Dialog de Confirmação*/
+                    final long codigoAlimento = alimentoController.salvarAlimento(alimentoInserido);
 
-                    if(codigoAlimento > 0){
+                    AlertDialog.Builder confirmaAlimento = new AlertDialog.Builder(AddAlimentoView.this);
+                    confirmaAlimento.setTitle("Atenção");
+                    confirmaAlimento.setMessage("Deseja inserir esse Alimento");
 
-                        Toast.makeText(AddAlimentoView.this, "Produto Salvo com sucesso",Toast.LENGTH_LONG).show();
+                    confirmaAlimento.setNegativeButton("Não", null);
+                    confirmaAlimento.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                    }else{
+                            if(codigoAlimento > 0){
 
-                        Toast.makeText(AddAlimentoView.this, "Não foi possível salvar",Toast.LENGTH_LONG).show();
-                    }
+                                Toast.makeText(AddAlimentoView.this, "Produto Salvo com sucesso",Toast.LENGTH_LONG).show();
 
+                            }else{
+
+                                Toast.makeText(AddAlimentoView.this, "Não foi possível salvar",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+                    confirmaAlimento.create().show();
 
                 }else{
 
                     Toast.makeText(AddAlimentoView.this, "Campos Obrigatórios",Toast.LENGTH_LONG).show();
                 }
-
-
-
             }
         });
     }
@@ -141,15 +147,19 @@ public class AddAlimentoView extends AppCompatActivity {
             return null;
         }
 
-        this.alimento.setValidade(validade_usual);
+        if(this.validade_usual != null) {
+            this.alimento.setValidade(validade_usual);
 
-        //Inserção da data atual de cadastro do alimento
+            //Inserção da data atual de cadastro do alimento
+            SimpleDateFormat formataData = new SimpleDateFormat("yyyy-MM-dd");
+            Date data = new Date();
+            String dataFormatada = formataData.format(data);
 
-        SimpleDateFormat formataData = new SimpleDateFormat("yyyy-MM-dd");
-        Date data = new Date();
-        String dataFormatada = formataData.format(data);
+            this.alimento.setData_inseriu(dataFormatada);
 
-        this.alimento.setData_inseriu(dataFormatada);
+        }else{
+            return null;
+        }
 
         return alimento;
     }
