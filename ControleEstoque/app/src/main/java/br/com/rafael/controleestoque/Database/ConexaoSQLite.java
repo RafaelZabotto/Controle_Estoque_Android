@@ -43,7 +43,7 @@ public class ConexaoSQLite extends SQLiteOpenHelper {
         /*String sqlTabelaVicentino =
                 "CREATE TABLE IF NOT EXISTS vicentino" +
                         "(" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "id INTEGER PRIMARY KEY," +
                             "nome TEXT," +
                             "email TEXT," +
                             "login TEXT," +

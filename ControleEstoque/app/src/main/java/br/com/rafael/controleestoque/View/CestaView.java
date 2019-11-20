@@ -32,8 +32,6 @@ public class CestaView extends AppCompatActivity {
     private Spinner spnAlimentoCesta;
     private List<Alimento> listaAlimento;
     private AlimentoController alimentoController;
-    private Button btnAdicionarCesta;
-    private Button btnFinalizarCesta;
 
     //Itens da Cesta
     private ListView lsvMontandoCesta;
@@ -107,11 +105,11 @@ public class CestaView extends AppCompatActivity {
         ItemDaCesta itemDaCesta = new ItemDaCesta();
         Alimento alimentoSelecionado = (Alimento) this.spnAlimentoCesta.getSelectedItem();
 
-        itemDaCesta.setNome(alimentoSelecionado.getNome());
-        itemDaCesta.setCodigoAlimento(alimentoSelecionado.getCodigo());
-        itemDaCesta.setValidade(alimentoSelecionado.getValidade());
+            itemDaCesta.setNome(alimentoSelecionado.getNome());
+            itemDaCesta.setCodigoAlimento(alimentoSelecionado.getCodigo());
+            itemDaCesta.setValidade(alimentoSelecionado.getValidade());
 
-        this.adapterListaItemDaCesta.addItemDoCarrinho(itemDaCesta);
+            this.adapterListaItemDaCesta.addItemDoCarrinho(itemDaCesta);
 
     }
 
@@ -121,21 +119,35 @@ public class CestaView extends AppCompatActivity {
 
         final Cesta cestaFinalizada = this.criandoCesta();
 
-        AlertDialog.Builder confirmaCesta = new AlertDialog.Builder(CestaView.this);
-        confirmaCesta.setTitle("Atenção");
-        confirmaCesta.setMessage("Deseja criar essa Cesta?");
+        if(itemDaCestaList_2.size() == 0){
 
-        confirmaCesta.setNegativeButton("Não", null);
-        confirmaCesta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            Toast.makeText(this, "Erro - A Cesta esta Vazia", Toast.LENGTH_LONG).show();
 
-                boolean inseriuCesta = salvarCesta(cestaFinalizada);
+        }else {
 
-            }
-        });
+            AlertDialog.Builder confirmaCesta = new AlertDialog.Builder(CestaView.this);
+            confirmaCesta.setTitle("Atenção");
+            confirmaCesta.setMessage("Deseja criar essa Cesta?");
 
-        confirmaCesta.create().show();
+            confirmaCesta.setNegativeButton("Não", null);
+            confirmaCesta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    boolean inseriuCesta = salvarCesta(cestaFinalizada);
+
+                    //Finaliza e recarrega a activity, sem transição
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(getIntent());
+                    overridePendingTransition(0, 0);
+
+                }
+            });
+
+            confirmaCesta.create().show();
+
+        }
 
     }
 

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,7 @@ public class AddAlimentoView extends AppCompatActivity {
     private Spinner spnAlimento;
     private List<Alimento> listaAlimento;
 
+    private Button visualizaSemana;
     private Button inserirAlimento;
 
     private TextView edtDataValidade;
@@ -84,10 +86,22 @@ public class AddAlimentoView extends AppCompatActivity {
         /*=============================================================================*/
 
         inserirAlimento = findViewById(R.id.btnInserirAlimento);
+        visualizaSemana = findViewById(R.id.btnSemana);
+
+        visualizaSemana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent it = new Intent(AddAlimentoView.this, ListAlimentoSemanalView.class);
+                startActivity(it);
+            }
+        });
 
         this.clickInserirListener();
 
     }
+
+
 
     private void clickInserirListener(){
 
@@ -123,6 +137,11 @@ public class AddAlimentoView extends AppCompatActivity {
 
                                 Toast.makeText(AddAlimentoView.this, "Não foi possível salvar",Toast.LENGTH_LONG).show();
                             }
+
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(getIntent());
+                            overridePendingTransition(0, 0);
                         }
                     });
 
@@ -141,7 +160,6 @@ public class AddAlimentoView extends AppCompatActivity {
         this.alimento = new Alimento();
 
         if(this.spnAlimento.getSelectedItem().toString().isEmpty() == false){
-            //Toast.makeText(AddAlimentoView.this, spnAlimento.toString(),Toast.LENGTH_LONG).show();
             this.alimento.setNome(spnAlimento.getSelectedItem().toString());
         }else{
             return null;

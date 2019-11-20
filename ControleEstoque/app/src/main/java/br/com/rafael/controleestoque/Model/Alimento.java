@@ -9,6 +9,7 @@ public class Alimento {
 
     private int codigo;
     private String nome;
+    private String nome_aux;
     private String validade;
     private String data_inseriu;
     private int qtdEstoque;
@@ -31,6 +32,14 @@ public class Alimento {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getNome_aux() {
+        return nome_aux;
+    }
+
+    public void setNome_aux(String nome_aux) {
+        this.nome_aux = nome_aux;
     }
 
     public String getValidade() {
@@ -66,12 +75,13 @@ public class Alimento {
                 ", qtdEstoque=" + qtdEstoque +
                 '}';*/
 
-        /*while(this.nome.length() < 50){
+        while(this.nome.length() < 24){
 
-            this.nome = this.nome + " ";
+            this.nome = this.nome + "\t";
 
-        }*/
-        return this.codigo + "  -  " +this.nome + "  -  " + validade;
+        }
+
+        return this.codigo + "      " + this.nome  + this.validade;
     }
 
 

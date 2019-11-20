@@ -108,6 +108,7 @@ public class AlimentoDAO {
                       "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Bolacha Maizena' LIMIT 5)) UNION\n" +
                       "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Bolo' LIMIT 5)) UNION\n" +
                       "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Bombril' LIMIT 5)) UNION\n" +
+                      "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Café' LIMIT 5)) UNION\n" +
                       "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Detergente' LIMIT 5)) UNION\n" +
                       "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Ervilha' LIMIT 5)) UNION\n" +
                       "SELECT * FROM ((select STRFTIME('%d/%m/%Y', a.validade), * from alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL AND a.nome like 'Farinha Mandioca' LIMIT 5)) UNION\n" +
@@ -223,7 +224,9 @@ public class AlimentoDAO {
         SQLiteDatabase db = null;
         Cursor cursor;
 
-        String query = "SELECT * FROM alimento WHERE validade LIKE DATE('NOW');";
+        String query = "SELECT strftime('%d/%m/%Y', a.validade), strftime('%d/%m/%Y', a.dataCadastro), * " +
+                "FROM alimento a WHERE dataCadastro <= DATE('NOW') AND dataCadastro <= DATE('NOW','+7 day')" +
+                "ORDER BY dataCadastro desc;";
 
         try{
 
@@ -238,9 +241,10 @@ public class AlimentoDAO {
                 do {
 
                     alimento = new Alimento();
-                    alimento.setCodigo(cursor.getInt(0));
-                    alimento.setNome(cursor.getString(1));
-                    alimento.setValidade(cursor.getString(2));
+                    alimento.setCodigo(cursor.getInt(2));
+                    alimento.setNome(cursor.getString(3));
+                    alimento.setValidade(cursor.getString(0));
+                    alimento.setData_inseriu(cursor.getString(1));
 
                     listarAlimentosInseridos.add(alimento);
 

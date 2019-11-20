@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,47 +7,69 @@
     android:orientation="vertical"
     tools:context=".View.CestaView">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Selecione um Alimento"/>
-
-    <Spinner
-        android:id="@+id/spnCesta"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:spinnerMode="dialog"
-        android:background="@color/colorAccent"/>
 
     <Button
         android:id="@+id/btnAdicionarCesta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="216dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
         android:onClick="eventAdicionaAlimento"
-        android:text="Adicionar" />
-
+        android:text="Adicionar"
+        app:layout_constraintEnd_toEndOf="@+id/spnCesta"
+        app:layout_constraintStart_toStartOf="@+id/spnCesta"
+        app:layout_constraintTop_toBottomOf="@+id/spnCesta" />
 
     <Button
         android:id="@+id/btnFinalizarCesta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="215dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="26dp"
         android:onClick="eventFecharCesta"
-        android:text="Finalizar A Cesta" />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Alimentos na Cesta" />
+        android:text="Finalizar A Cesta"
+        app:layout_constraintEnd_toEndOf="@+id/lsvCesta"
+        app:layout_constraintStart_toStartOf="@+id/lsvCesta"
+        app:layout_constraintTop_toBottomOf="@+id/lsvCesta" />
 
     <ListView
         android:id="@+id/lsvCesta"
-        android:layout_width="match_parent"
-        android:layout_height="371dp" />
+        android:layout_width="378dp"
+        android:layout_height="280dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Spinner
+        android:id="@+id/spnCesta"
+        android:layout_width="288dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@android:color/background_light"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="26dp"
+        android:text="Alimentos na Cesta"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdicionarCesta" />
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
