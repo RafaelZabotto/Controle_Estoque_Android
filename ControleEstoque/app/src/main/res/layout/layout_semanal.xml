@@ -8,10 +8,12 @@
     <TextView
         android:id="@+id/txtNomeSemanal"
         android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
         android:textColor="@android:color/background_dark"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -21,19 +23,19 @@
     <TextView
         android:id="@+id/textView6"
         android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         android:text="Código: "
         android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/txtNomeSemanal"
         app:layout_constraintTop_toBottomOf="@+id/txtNomeSemanal" />
 
     <TextView
         android:id="@+id/txtCodigoSemanal"
         android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView6"
@@ -42,19 +44,19 @@
     <TextView
         android:id="@+id/textView9"
         android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         android:text="Validade: "
         android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/txtCodigoSemanal"
         app:layout_constraintTop_toBottomOf="@+id/txtNomeSemanal" />
 
     <TextView
         android:id="@+id/txtValdiadeSemanal"
         android:layout_width="140dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -62,25 +64,37 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="130dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Data Inserção: "
         android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/txtNomeSemanal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtInsercaoSemanal"
-        android:layout_width="140dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/txtNomeSemanal"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtNomeSemanal"
+        app:layout_constraintTop_toTopOf="@+id/txtNomeSemanal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,6 +55,8 @@ public class CestaView extends AppCompatActivity {
         this.alimentoController = new AlimentoController(ConexaoSQLite.getInstaciaConexao(this));
         this.listaAlimento = this.alimentoController.listarAlimentosCesta();
 
+        Log.d("teste",listaAlimento.toString());
+
         this.spnAlimentoCesta = findViewById(R.id.spnCesta);
         ArrayAdapter<Alimento> spnAlimentoAdapter = new ArrayAdapter<Alimento>(
                 this,android.R.layout.simple_spinner_item, listaAlimento);
@@ -95,6 +98,12 @@ public class CestaView extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MenuView.class));
+        finish();
     }
 
 

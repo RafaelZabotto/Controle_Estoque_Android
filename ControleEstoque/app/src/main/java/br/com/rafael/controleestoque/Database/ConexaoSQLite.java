@@ -40,17 +40,16 @@ public class ConexaoSQLite extends SQLiteOpenHelper {
         
         sqLiteDatabase.execSQL(sqlTabelaAlimento);
 
-        /*String sqlTabelaVicentino =
+        String sqlTabelaVicentino =
                 "CREATE TABLE IF NOT EXISTS vicentino" +
                         "(" +
                         "id INTEGER PRIMARY KEY," +
-                            "nome TEXT," +
-                            "email TEXT," +
-                            "login TEXT," +
-                            "senha TEXT" +
+                        "nome TEXT," +
+                        "email TEXT," +
+                        "senha TEXT" +
                         ")";
 
-        sqLiteDatabase.execSQL(sqlTabelaVicentino);*/
+        sqLiteDatabase.execSQL(sqlTabelaVicentino);
 
         String sqlTabelaCesta =
                 "CREATE TABLE IF NOT EXISTS cesta" +

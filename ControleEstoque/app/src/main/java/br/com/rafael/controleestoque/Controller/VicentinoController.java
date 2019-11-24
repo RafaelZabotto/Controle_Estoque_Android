@@ -15,10 +15,10 @@ public class VicentinoController {
     }
 
     public long salvarVicentino(Vicentino vicentino){
-        return this.vicentinoDAO.salvarVicentino(vicentino);
+        return this.vicentinoDAO.salvarVicentinoDAO(vicentino);
     }
 
-    public List<Vicentino> listarVicentino(){
-        return this.vicentinoDAO.listarVicentinos();
+    public Vicentino autenticarVicentino(String email, String senha){
+        return this.vicentinoDAO.autenticarVicentinoDAO(email,senha);
     }
 }

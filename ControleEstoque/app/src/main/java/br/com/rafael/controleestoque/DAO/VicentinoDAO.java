@@ -1,5 +1,6 @@
 package br.com.rafael.controleestoque.DAO;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -18,12 +19,20 @@ public class VicentinoDAO {
         this.conexaoSQLite = conexaoSQLite;
     }
 
-    public long salvarVicentino(Vicentino vicentino){
+    public long salvarVicentinoDAO(Vicentino vicentino){
 
         SQLiteDatabase db = conexaoSQLite.getWritableDatabase();
 
         try{
 
+            ContentValues values = new ContentValues();
+            values.put("nome",vicentino.getNome());
+            values.put("email",vicentino.getEmail());
+            values.put("senha",vicentino.getSenha());
+
+            long idVicentinoInserido = db.insert("vicentino", null,values);
+
+            return idVicentinoInserido;
 
         }catch (Exception e){
             e.printStackTrace();
@@ -37,45 +46,29 @@ public class VicentinoDAO {
 
     }
 
-    public List<Vicentino> listarVicentinos(){
+   public Vicentino autenticarVicentinoDAO(String email,String senha){
 
+        SQLiteDatabase db = conexaoSQLite.getReadableDatabase();
 
-        List<Vicentino> listarVicentinos = new ArrayList<>();
-        SQLiteDatabase db = null;
-        Cursor cursor;
+        final String[] propriedades = {"id","nome","email","senha"};
 
-        String query = "SELECT * FROM vicentino;";
+        Cursor cursor = db.query("vicentino",propriedades,"email = ? AND senha = ?",
+                new String[] {email,senha},null, null, null, null);
 
-        try {
+        if(cursor.moveToFirst()){
 
-            cursor = db.rawQuery(query, null);
+            Vicentino vicentino = new Vicentino();
 
-            if(cursor.moveToFirst()){
+            vicentino.setCodigo(Integer.parseInt(cursor.getString(0)));
+            vicentino.setNome(cursor.getString(1));
+            vicentino.setEmail(cursor.getString(2));
+            vicentino.setSenha(cursor.getString(3));
 
-                Vicentino vicentino = new Vicentino();
+            return vicentino;
 
-                do {
-
-                    vicentino = new Vicentino();
-                    vicentino.setNome(cursor.getString(1));
-                    vicentino.setEmail(cursor.getString(3));
-
-                    listarVicentinos.add(vicentino);
-
-                }while(cursor.moveToNext());
-            }
-
-        }catch (Exception e){
-            Log.d("ERRO LISTA DE USUÁRIOS", "Erro ao retornar os usuários");
+        }else{
             return null;
-
-        }finally {
-            if(db != null){
-                db.close();
-            }
         }
+   }
 
-
-        return listarVicentinos;
-    }
 }

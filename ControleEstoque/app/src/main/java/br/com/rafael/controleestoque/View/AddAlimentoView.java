@@ -74,8 +74,24 @@ public class AddAlimentoView extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
                         mes = mes+1;
-                        String date = dia+"/"+mes+"/"+ano;
-                        validade_usual = ano+"-"+mes+"-"+dia;
+
+                        String dia_aux = String.valueOf(dia);
+                        String mes_aux = String.valueOf(mes);
+
+                        if(dia >= 1 && dia < 10){
+
+                            dia_aux = "0"+dia_aux;
+                        }
+
+                        if(mes >= 1 && mes < 10){
+
+                            mes_aux = "0"+mes_aux;
+                        }
+
+
+
+                        String date = dia_aux+"/"+mes_aux+"/"+ano;
+                        validade_usual = ano+"-"+mes_aux+"-"+dia_aux;
                         edtDataValidade.setText(date);
                     }
                 },ano,mes,dia);
@@ -101,6 +117,11 @@ public class AddAlimentoView extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MenuView.class));
+        finish();
+    }
 
 
     private void clickInserirListener(){

@@ -1,8 +1,10 @@
 package br.com.rafael.controleestoque.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +16,10 @@ import android.widget.ImageView;
 import java.util.List;
 
 import br.com.rafael.controleestoque.Adapters.AdapterListaAlimento;
+import br.com.rafael.controleestoque.Adapters.AdapterListaVencimentos;
 import br.com.rafael.controleestoque.Controller.AlimentoController;
 import br.com.rafael.controleestoque.Database.ConexaoSQLite;
+import br.com.rafael.controleestoque.MainActivity;
 import br.com.rafael.controleestoque.Model.Alimento;
 import br.com.rafael.controleestoque.R;
 
@@ -26,9 +30,29 @@ public class MenuView extends AppCompatActivity {
     private ImageView storageConsult;
     private ImageView dateConsult;
 
-    private AdapterListaAlimento adapterListaAlimento;
+    private AdapterListaVencimentos adapterListaVencimentos;
     private List<Alimento> alimentoList;
 
+
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MenuView.this);
+        builder.setTitle("Atenção");
+        builder.setMessage("Deseja realmente sair?");
+
+        builder.setNegativeButton("Não",null);
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                Intent it = new Intent(MenuView.this, MainActivity.class);
+                startActivity(it);
+            }
+        });
+
+        builder.create().show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +62,15 @@ public class MenuView extends AppCompatActivity {
         AlimentoController alimentoController =
                 new AlimentoController(ConexaoSQLite.getInstaciaConexao(MenuView.this));
 
-        alimentoList = alimentoController.listarAlimentos();
+        alimentoList = alimentoController.listarAlimentoVencido();
 
-        this.adapterListaAlimento = new AdapterListaAlimento(MenuView.this, this.alimentoList);
+        this.adapterListaVencimentos = new AdapterListaVencimentos(MenuView.this, this.alimentoList);
 
-        int teste = adapterListaAlimento.getCount();
+        int registro = adapterListaVencimentos.getCount();
+
+        String registro_aux = String.valueOf(registro);
+
+        Log.d("registro",registro_aux);
 
 
         addAlimento    = findViewById(R.id.imgAdd);
@@ -50,7 +78,7 @@ public class MenuView extends AppCompatActivity {
         storageConsult = findViewById(R.id.imgStorage);
         dateConsult    = findViewById(R.id.imgDate);
 
-        if(teste > 0){
+        if(registro > 0){
             dateConsult.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.calendar_not_ok));
         }else{
             dateConsult.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.calendar_ok));
@@ -62,6 +90,7 @@ public class MenuView extends AppCompatActivity {
 
                 Intent it = new Intent(MenuView.this, AddAlimentoView.class);
                 startActivity(it);
+                finish();
             }
         });
 
@@ -71,6 +100,7 @@ public class MenuView extends AppCompatActivity {
 
                 Intent it  = new Intent(MenuView.this, CestaView.class);
                 startActivity(it);
+                finish();
             }
         });
 
@@ -81,6 +111,7 @@ public class MenuView extends AppCompatActivity {
                 Intent it = new Intent(MenuView.this, ListAlimentoView.class);
                 startActivity(it);
 
+
             }
         });
 
@@ -88,8 +119,15 @@ public class MenuView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Intent it = new Intent(MenuView.this, ListAlimentoVencimentoView.class);
+                startActivity(it);
+
+
             }
         });
+
+
+
 
     }
 

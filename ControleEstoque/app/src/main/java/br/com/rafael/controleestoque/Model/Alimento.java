@@ -75,13 +75,13 @@ public class Alimento {
                 ", qtdEstoque=" + qtdEstoque +
                 '}';*/
 
-        while(this.nome.length() < 24){
+        /*while(this.nome.length() < 24){
 
             this.nome = this.nome + "\t";
 
-        }
+        }*/
 
-        return this.codigo + "      " + this.nome  + this.validade;
+        return this.codigo + "      " + this.nome + "      " + this.validade;
     }
 
 

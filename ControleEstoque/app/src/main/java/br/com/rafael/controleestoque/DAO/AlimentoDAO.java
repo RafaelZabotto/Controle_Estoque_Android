@@ -180,7 +180,9 @@ public class AlimentoDAO {
         SQLiteDatabase db = null;
         Cursor cursor;
 
-        String query = "SELECT * FROM alimento WHERE validade < DATE('NOW','+30 day') AND validade >= DATE('NOW');";
+        String query = "SELECT strftime('%d/%m/%Y', a.validade), * " +
+                "FROM alimento a LEFT JOIN item_cesta b ON a.id = b.id_alimento WHERE b.id_alimento IS NULL " +
+                "AND a.validade >= DATE('NOW') AND a.validade < DATE('NOW','+30 day') ORDER BY a.validade;";
 
         try{
 
@@ -195,9 +197,9 @@ public class AlimentoDAO {
                 do {
 
                     alimento = new Alimento();
-                    alimento.setCodigo(cursor.getInt(0));
-                    alimento.setNome(cursor.getString(1));
-                    alimento.setValidade(cursor.getString(2));
+                    alimento.setCodigo(cursor.getInt(1));
+                    alimento.setNome(cursor.getString(2));
+                    alimento.setValidade(cursor.getString(0));
 
                     listarAlimentosVencidos.add(alimento);
 

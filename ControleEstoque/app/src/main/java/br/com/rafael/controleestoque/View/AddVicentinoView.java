@@ -2,7 +2,9 @@ package br.com.rafael.controleestoque.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +20,7 @@ public class AddVicentinoView extends AppCompatActivity {
     private EditText edtNome;
     private EditText edtEmail;
     private EditText edtSenha;
-    private Button inserirVicentino;
+    private Button btnInserirVicentino;
 
     private Vicentino vicentino;
 
@@ -30,33 +32,71 @@ public class AddVicentinoView extends AppCompatActivity {
         edtNome = findViewById(R.id.edtNomeV);
         edtEmail = findViewById(R.id.edtEmailV);
         edtSenha = findViewById(R.id.edtSenhaV);
-        inserirVicentino = findViewById(R.id.btnInserirAlimento);
+        btnInserirVicentino = findViewById(R.id.btnInserirVicentino);
 
-       // this.clickInserirListener();
-
+        this.clickInserirVicentinoListener();
     }
 
-    /*private void clickInserirListener(){
+    private void clickInserirVicentinoListener(){
 
-        this.inserirVicentino.setOnClickListener(new View.OnClickListener() {
+        this.btnInserirVicentino.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Vicentino vicentinoInserido = new Vicentino();
+                Vicentino inserirVicentino = getDadosCadastroVicentino();
 
-                VicentinoController vicentinoController =
-                        new VicentinoController(ConexaoSQLite.getInstaciaConexao(AddVicentinoView.this));
+                if(inserirVicentino != null){
 
-                long codigoVicentino = vicentinoController.salvarVicentino(vicentinoInserido);
+                    VicentinoController vicentinoController =
+                            new VicentinoController(ConexaoSQLite.getInstaciaConexao(AddVicentinoView.this));
 
-                if (codigoVicentino > 0) {
+                    //inserindo vicentino
+                    final long condigoVicentino = vicentinoController.salvarVicentino(inserirVicentino);
 
-                    Toast.makeText(AddVicentinoView.this, "Vicentino Salvo com sucesso", Toast.LENGTH_LONG).show();
+                    if(condigoVicentino > 0){
 
+                        Toast.makeText(AddVicentinoView.this, "Vicentino criado com sucesso",Toast.LENGTH_LONG).show();
+
+                    }else{
+
+                        Toast.makeText(AddVicentinoView.this, "Não foi possível salvar",Toast.LENGTH_LONG).show();
+                    }
+
+                    finish();
+
+                }else{
+                    Toast.makeText(AddVicentinoView.this, "Campos Obrigatórios",Toast.LENGTH_LONG).show();
                 }
+
             }
         });
-    }*/
+    }
 
-    //VALIDAÇÃO dos cam
+    private Vicentino getDadosCadastroVicentino(){
+
+        this.vicentino = new Vicentino();
+
+        //validação nome
+        if(this.edtNome.getText().toString().isEmpty() == false){
+            this.vicentino.setNome(this.edtNome.getText().toString());
+        }else{
+            return null;
+        }
+
+        //valdiação email
+        if(this.edtEmail.getText().toString().isEmpty() == false){
+            this.vicentino.setEmail(this.edtEmail.getText().toString());
+        }else{
+            return null;
+        }
+
+        //validação senha
+        if(this.edtSenha.getText().toString().isEmpty() == false){
+            this.vicentino.setSenha(this.edtSenha.getText().toString());
+        }else{
+            return null;
+        }
+
+        return vicentino;
+    }
 }
