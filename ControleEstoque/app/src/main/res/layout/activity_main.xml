@@ -21,7 +21,7 @@
         android:layout_width="330dp"
         android:layout_height="47dp"
         android:layout_marginTop="72dp"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/rounded_button"
         android:text="Cadastrar"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/edtSenhaLogin"
@@ -60,7 +60,7 @@
         android:id="@+id/edtNomeLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:ems="10"
@@ -70,7 +70,7 @@
         android:textColorLink="@android:color/holo_blue_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -111,4 +111,18 @@
         app:layout_constraintEnd_toEndOf="@+id/edtSenhaLogin"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="163dp"
+        android:layout_height="172dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginLeft="124dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginRight="124dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/simbolo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

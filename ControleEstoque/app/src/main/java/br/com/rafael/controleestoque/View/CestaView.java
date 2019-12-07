@@ -78,7 +78,7 @@ public class CestaView extends AppCompatActivity {
 
                 AlertDialog.Builder opcoes = new AlertDialog.Builder(CestaView.this);
                 opcoes.setTitle("Atenção: ");
-                opcoes.setMessage("Deseja remover o item  " + itemDaCesta.getNome() + "?");
+                opcoes.setMessage("Deseja remover o item ?");
 
                 opcoes.setNegativeButton("Não", null);
                 opcoes.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
